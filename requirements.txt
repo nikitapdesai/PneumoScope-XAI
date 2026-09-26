@@ -1,0 +1,17 @@
+tensorflow==2.18.*            # 2.19+ breaks tensorflow-metal on Apple Silicon
+tensorflow-metal; sys_platform == "darwin" and platform_machine == "arm64"
+numpy<2.1
+pandas
+scipy
+scikit-learn>=1.5
+scikit-image
+tifffile<2025.6
+opencv-python-headless
+matplotlib
+seaborn
+joblib
+Pillow
+streamlit>=1.46
+kagglehub
+pytest
+certifi

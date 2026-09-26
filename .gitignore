@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+.DS_Store
+
+# data is never committed (license + size)
+data/raw/
+data/processed/
+
+# keep only what the deployed app needs (~65 MB, under GitHub's 100 MB limit)
+models_saved/*
+!models_saved/densenet121_finetuned.keras
+!models_saved/densenet_finetuned_temperature.json
+!models_saved/densenet_finetuned_abstain.json
+!models_saved/.gitkeep
+
+reports/results/*.npy

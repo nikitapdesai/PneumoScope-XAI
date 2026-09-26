@@ -1,0 +1,10 @@
+{
+  "threshold": 0.7552241086959839,
+  "target_accuracy": 0.9,
+  "test": {
+    "threshold": 0.7552241086959839,
+    "coverage": 0.6093189964157706,
+    "accuracy_answered": 0.9176470588235294,
+    "accuracy_all": 0.8291517323775388
+  }
+}
