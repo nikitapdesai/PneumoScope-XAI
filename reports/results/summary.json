@@ -1,13 +1,15 @@
 {
   "test_n": 837,
-  "best": "DenseNet121 (fine-tuned)",
+  "best": "EfficientNetV2-B0 224px (fine-tuned)",
+  "best_key": "effnetv2_b0_224_finetuned",
   "models": [
     {
       "key": "logreg",
       "name": "Logistic Regression (HOG)",
       "note": "classical baseline",
       "is_best": false,
-      "p_vs_best": 1.1699599803798208e-05,
+      "p_vs_best": 0.0005715227032055821,
+      "val_macro_f1": 0.7481602759472407,
       "accuracy": 0.7706093189964157,
       "accuracy_ci": [
         0.7443249701314217,
@@ -39,7 +41,8 @@
       "name": "Random Forest (HOG)",
       "note": "classical baseline",
       "is_best": false,
-      "p_vs_best": 5.656214894965935e-06,
+      "p_vs_best": 0.0026846980412799162,
+      "val_macro_f1": 0.7542360102225526,
       "accuracy": 0.7801672640382318,
       "accuracy_ci": [
         0.7514934289127837,
@@ -71,108 +74,309 @@
       "name": "CNN (scratch)",
       "note": "learned features",
       "is_best": false,
-      "p_vs_best": 0.009682849923057572,
-      "accuracy": 0.8004778972520908,
+      "p_vs_best": 0.6529643755164601,
+      "val_macro_f1": 0.7872507325833046,
+      "accuracy": 0.8124253285543608,
       "accuracy_ci": [
-        0.7753584229390681,
-        0.8255675029868578
+        0.7885005973715651,
+        0.8375149342891278
       ],
-      "macro_f1": 0.7873047318661707,
+      "macro_f1": 0.7998077774487228,
       "macro_f1_ci": [
-        0.7611936352842993,
-        0.8133491702394376
+        0.7739450713314855,
+        0.8264070668673188
       ],
-      "roc_auc_ovr": 0.9042664029555789,
+      "roc_auc_ovr": 0.9138839361394936,
       "roc_auc_ovr_ci": [
-        0.889158482141534,
-        0.9198219200796127
+        0.8990514670581142,
+        0.9292313041259432
       ],
-      "ece": 0.04148080681529665,
+      "ece": 0.03876871995743601,
       "per_class_f1": {
-        "NORMAL": 0.9106753812636166,
-        "PNEUMONIA_BACTERIA": 0.8215158924205379,
-        "PNEUMONIA_VIRUS": 0.6297229219143576
+        "NORMAL": 0.9230769230769231,
+        "PNEUMONIA_BACTERIA": 0.833130328867235,
+        "PNEUMONIA_VIRUS": 0.6432160804020101
       },
-      "binary_accuracy": 0.951015531660693,
-      "binary_auc": 0.9845386208594644,
-      "subtype_accuracy": 0.7823240589198036,
-      "subtype_macro_f1": 0.7518876421647203
+      "binary_accuracy": 0.954599761051374,
+      "binary_auc": 0.9867401474443462,
+      "subtype_accuracy": 0.79050736497545,
+      "subtype_macro_f1": 0.7615260769868761
     },
     {
       "key": "densenet_frozen",
       "name": "DenseNet121 (frozen)",
       "note": "transfer, stage 1",
       "is_best": false,
-      "p_vs_best": 0.008771714457060136,
-      "accuracy": 0.8004778972520908,
+      "p_vs_best": 0.3481412903192068,
+      "val_macro_f1": 0.7783470160390974,
+      "accuracy": 0.8064516129032258,
       "accuracy_ci": [
-        0.7741935483870968,
-        0.8267622461170848
+        0.7813620071684588,
+        0.8315412186379928
       ],
-      "macro_f1": 0.7793840662727832,
+      "macro_f1": 0.784969727028848,
       "macro_f1_ci": [
-        0.7515211329177434,
-        0.8069127846758674
+        0.7573649472827619,
+        0.812113204227454
       ],
-      "roc_auc_ovr": 0.9081349175792864,
+      "roc_auc_ovr": 0.9127331134437168,
       "roc_auc_ovr_ci": [
-        0.8936608190551909,
-        0.9236549242209294
+        0.8979196994621087,
+        0.9277254553179181
       ],
-      "ece": 0.02959285610608018,
+      "ece": 0.02688027578300331,
       "per_class_f1": {
-        "NORMAL": 0.8949771689497716,
-        "PNEUMONIA_BACTERIA": 0.8356481481481481,
-        "PNEUMONIA_VIRUS": 0.6075268817204301
+        "NORMAL": 0.8934240362811792,
+        "PNEUMONIA_BACTERIA": 0.8432055749128919,
+        "PNEUMONIA_VIRUS": 0.6182795698924731
       },
-      "binary_accuracy": 0.9366786140979689,
-      "binary_auc": 0.9814318613038252,
-      "subtype_accuracy": 0.7921440261865794,
-      "subtype_macro_f1": 0.7534701372805053
+      "binary_accuracy": 0.9414575866188769,
+      "binary_auc": 0.9837564995727301,
+      "subtype_accuracy": 0.7986906710310966,
+      "subtype_macro_f1": 0.7604952435584875
     },
     {
       "key": "densenet_finetuned",
       "name": "DenseNet121 (fine-tuned)",
       "note": "transfer, stage 2",
-      "is_best": true,
-      "p_vs_best": null,
+      "is_best": false,
+      "p_vs_best": 0.34918183817058834,
+      "val_macro_f1": 0.8156648082467969,
       "accuracy": 0.8291517323775388,
       "accuracy_ci": [
-        0.8052568697729988,
+        0.8040621266427718,
         0.8530764635603344
       ],
-      "macro_f1": 0.8112891657959486,
+      "macro_f1": 0.8162196492851375,
       "macro_f1_ci": [
-        0.7847764618203048,
-        0.8379566199411818
+        0.790868574114701,
+        0.8430676851268375
       ],
-      "roc_auc_ovr": 0.9244912947337882,
+      "roc_auc_ovr": 0.9304920307849388,
       "roc_auc_ovr_ci": [
-        0.9118491329337726,
-        0.9383808094082642
+        0.9184518921742086,
+        0.9441972038152106
       ],
-      "ece": 0.04022627520589703,
+      "ece": 0.03761643253204502,
       "per_class_f1": {
-        "NORMAL": 0.9276595744680851,
-        "PNEUMONIA_BACTERIA": 0.8536880290205562,
-        "PNEUMONIA_VIRUS": 0.6525198938992043
+        "NORMAL": 0.9385964912280702,
+        "PNEUMONIA_BACTERIA": 0.8484848484848485,
+        "PNEUMONIA_VIRUS": 0.6615776081424937
       },
-      "binary_accuracy": 0.959378733572282,
-      "binary_auc": 0.9925119128658952,
-      "subtype_accuracy": 0.8085106382978723,
-      "subtype_macro_f1": 0.7811611283731039
+      "binary_accuracy": 0.972520908004779,
+      "binary_auc": 0.9929536665556248,
+      "subtype_accuracy": 0.8019639934533551,
+      "subtype_macro_f1": 0.7754365608512215
+    },
+    {
+      "key": "effnetv2_b0_224_frozen",
+      "name": "EfficientNetV2-B0 224px (frozen)",
+      "note": "resolution study, stage 1",
+      "is_best": false,
+      "p_vs_best": 0.00610552107452477,
+      "val_macro_f1": 0.7702780639137209,
+      "accuracy": 0.7861409796893668,
+      "accuracy_ci": [
+        0.7586618876941458,
+        0.8136200716845878
+      ],
+      "macro_f1": 0.7741063534166983,
+      "macro_f1_ci": [
+        0.7455986013950292,
+        0.8011488021308523
+      ],
+      "roc_auc_ovr": 0.9113104716167489,
+      "roc_auc_ovr_ci": [
+        0.8969802733223633,
+        0.9254723889262467
+      ],
+      "ece": 0.037118710034494615,
+      "per_class_f1": {
+        "NORMAL": 0.8827586206896552,
+        "PNEUMONIA_BACTERIA": 0.8205128205128205,
+        "PNEUMONIA_VIRUS": 0.6190476190476191
+      },
+      "binary_accuracy": 0.929510155316607,
+      "binary_auc": 0.9875077850035486,
+      "subtype_accuracy": 0.7741407528641571,
+      "subtype_macro_f1": 0.7461157681745917
+    },
+    {
+      "key": "effnetv2_b0_224_finetuned",
+      "name": "EfficientNetV2-B0 224px (fine-tuned)",
+      "note": "resolution study, stage 2",
+      "is_best": true,
+      "p_vs_best": null,
+      "val_macro_f1": 0.8193854198618685,
+      "accuracy": 0.8183990442054958,
+      "accuracy_ci": [
+        0.7933094384707288,
+        0.8434886499402628
+      ],
+      "macro_f1": 0.8091818010323952,
+      "macro_f1_ci": [
+        0.7833953400265713,
+        0.8359206966627991
+      ],
+      "roc_auc_ovr": 0.9159798286944302,
+      "roc_auc_ovr_ci": [
+        0.9006681272966152,
+        0.9320157580003189
+      ],
+      "ece": 0.05020348636907489,
+      "per_class_f1": {
+        "NORMAL": 0.9333333333333333,
+        "PNEUMONIA_BACTERIA": 0.8387096774193549,
+        "PNEUMONIA_VIRUS": 0.6555023923444976
+      },
+      "binary_accuracy": 0.9629629629629629,
+      "binary_auc": 0.9930188433295193,
+      "subtype_accuracy": 0.7937806873977087,
+      "subtype_macro_f1": 0.7709240876954938
+    },
+    {
+      "key": "effnetv2_b0_384_frozen",
+      "name": "EfficientNetV2-B0 384px (frozen)",
+      "note": "resolution study, stage 1",
+      "is_best": false,
+      "p_vs_best": 0.17966501480803035,
+      "val_macro_f1": 0.7619100185149493,
+      "accuracy": 0.8016726403823178,
+      "accuracy_ci": [
+        0.7765830346475507,
+        0.8267622461170848
+      ],
+      "macro_f1": 0.7858329785724422,
+      "macro_f1_ci": [
+        0.7579564235809114,
+        0.8127546746142916
+      ],
+      "roc_auc_ovr": 0.9120475431111809,
+      "roc_auc_ovr_ci": [
+        0.8977391920998823,
+        0.9270784448276348
+      ],
+      "ece": 0.03195878749395072,
+      "per_class_f1": {
+        "NORMAL": 0.8879310344827587,
+        "PNEUMONIA_BACTERIA": 0.8345679012345679,
+        "PNEUMONIA_VIRUS": 0.635
+      },
+      "binary_accuracy": 0.9366786140979689,
+      "binary_auc": 0.982510899004968,
+      "subtype_accuracy": 0.79050736497545,
+      "subtype_macro_f1": 0.7639331594706849
+    },
+    {
+      "key": "effnetv2_b0_384_finetuned",
+      "name": "EfficientNetV2-B0 384px (fine-tuned)",
+      "note": "resolution study, stage 2",
+      "is_best": false,
+      "p_vs_best": 0.12991792302255253,
+      "val_macro_f1": 0.8047572298630882,
+      "accuracy": 0.8339307048984468,
+      "accuracy_ci": [
+        0.8100358422939068,
+        0.8590203106332138
+      ],
+      "macro_f1": 0.8172251754917497,
+      "macro_f1_ci": [
+        0.790110948576182,
+        0.8439431629513866
+      ],
+      "roc_auc_ovr": 0.9239930742035639,
+      "roc_auc_ovr_ci": [
+        0.910371132575317,
+        0.9378228073909111
+      ],
+      "ece": 0.049255802889166506,
+      "per_class_f1": {
+        "NORMAL": 0.9393939393939394,
+        "PNEUMONIA_BACTERIA": 0.8578313253012049,
+        "PNEUMONIA_VIRUS": 0.6544502617801047
+      },
+      "binary_accuracy": 0.9689366786140979,
+      "binary_auc": 0.9941775415320888,
+      "subtype_accuracy": 0.8117839607201309,
+      "subtype_macro_f1": 0.7837474339916473
+    },
+    {
+      "key": "effnetv2_b0_512_frozen",
+      "name": "EfficientNetV2-B0 512px (frozen)",
+      "note": "resolution study, stage 1",
+      "is_best": false,
+      "p_vs_best": 0.005544959035344681,
+      "val_macro_f1": 0.7603079117714348,
+      "accuracy": 0.7861409796893668,
+      "accuracy_ci": [
+        0.7598566308243727,
+        0.8136200716845878
+      ],
+      "macro_f1": 0.7679414585310722,
+      "macro_f1_ci": [
+        0.7393116299141684,
+        0.7966762815306659
+      ],
+      "roc_auc_ovr": 0.9104189968437307,
+      "roc_auc_ovr_ci": [
+        0.8954960117007296,
+        0.9258853293298966
+      ],
+      "ece": 0.03500318427524541,
+      "per_class_f1": {
+        "NORMAL": 0.8830022075055187,
+        "PNEUMONIA_BACTERIA": 0.8258221680876979,
+        "PNEUMONIA_VIRUS": 0.595
+      },
+      "binary_accuracy": 0.9390681003584229,
+      "binary_auc": 0.9803673073302146,
+      "subtype_accuracy": 0.7757774140752864,
+      "subtype_macro_f1": 0.7450887242407355
+    },
+    {
+      "key": "effnetv2_b0_512_finetuned",
+      "name": "EfficientNetV2-B0 512px (fine-tuned)",
+      "note": "resolution study, stage 2",
+      "is_best": false,
+      "p_vs_best": 0.52577336017565,
+      "val_macro_f1": 0.8094233834688671,
+      "accuracy": 0.8255675029868578,
+      "accuracy_ci": [
+        0.8028673835125448,
+        0.8506571087216248
+      ],
+      "macro_f1": 0.8141537492352517,
+      "macro_f1_ci": [
+        0.7906366144613938,
+        0.8408524671733391
+      ],
+      "roc_auc_ovr": 0.9284557715202273,
+      "roc_auc_ovr_ci": [
+        0.9150223423498675,
+        0.9426137539410573
+      ],
+      "ece": 0.035734236169174746,
+      "per_class_f1": {
+        "NORMAL": 0.9276018099547512,
+        "PNEUMONIA_BACTERIA": 0.8481927710843373,
+        "PNEUMONIA_VIRUS": 0.6666666666666666
+      },
+      "binary_accuracy": 0.9605734767025089,
+      "binary_auc": 0.9945179091290934,
+      "subtype_accuracy": 0.8101472995090017,
+      "subtype_macro_f1": 0.7833174358598087
     }
   ],
   "calibration": {
-    "temperature": 1.082334780220145,
-    "ece_before": 0.04022627520589703,
-    "ece_after": 0.05346972134805493
+    "temperature": 0.9816248713184155,
+    "ece_before": 0.05020348636907489,
+    "ece_after": 0.04839913851471357
   },
   "selective": {
     "target_accuracy": 0.9,
-    "threshold": 0.7552241086959839,
-    "coverage": 0.6093189964157706,
-    "accuracy_answered": 0.9176470588235294,
-    "accuracy_all": 0.8291517323775388
+    "threshold": 0.6999016404151917,
+    "coverage": 0.7311827956989247,
+    "accuracy_answered": 0.880718954248366,
+    "accuracy_all": 0.8183990442054958
   }
 }

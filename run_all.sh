@@ -10,6 +10,11 @@ $PY -m src.data.eda
 $PY -m src.models.baseline_ml
 $PY -m src.models.train_dl --model cnn $QUICK
 $PY -m src.models.train_dl --model densenet $QUICK
-$PY -m src.evaluation.compare
+for RES in 224 384 512; do                      # resolution study (A)
+  $PY -m src.models.train_dl --model effnetv2 --img-size $RES $QUICK
+done
+$PY -m src.evaluation.compare                   # picks + records the deployed model
+$PY -m src.evaluation.resolution_study
+$PY -m src.evaluation.conformal                 # conformal prediction (C) for the deployed model
 $PY -m src.evaluation.gradcam_report
-echo "Done. See reports/model_comparison.md, then: streamlit run app/streamlit_app.py"
+echo "Done. See reports/*.md, then: streamlit run app/streamlit_app.py"

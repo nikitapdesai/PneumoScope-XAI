@@ -1,0 +1,90 @@
+2026-10-15 11:40:23.536871: I metal_plugin/src/device/metal_device.cc:1154] Metal device set to: Apple M5
+2026-10-15 11:40:23.537062: I metal_plugin/src/device/metal_device.cc:296] systemMemory: 16.00 GB
+2026-10-15 11:40:23.537068: I metal_plugin/src/device/metal_device.cc:313] maxCacheSize: 5.92 GB
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+/Users/ankit/Downloads/DL/.venv/lib/python3.12/site-packages/keras/src/trainers/epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+GPUs: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+class weights: {0: 1.2336283185840708, 1: 0.7022670025188917, 2: 1.3064667291471415}
+Epoch 1/25
+2026-10-15 11:40:24.773621: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:117] Plugin optimizer for device_type GPU is enabled.
+2026-10-15 11:40:37.007073: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:450] ShuffleDatasetV3:3: Filling up shuffle buffer (this may take a while): 3196 of 4182
+2026-10-15 11:40:39.475364: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:480] Shuffle buffer filled.
+262/262 ━━━━━━━━━━━━━━━━━━━━ 119s 386ms/step - accuracy: 0.5775 - loss: 1.0767 - val_accuracy: 0.6906 - val_loss: 0.7441 - learning_rate: 0.0010
+Epoch 2/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 99s 377ms/step - accuracy: 0.6561 - loss: 0.8203 - val_accuracy: 0.7694 - val_loss: 0.5698 - learning_rate: 0.0010
+Epoch 3/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 106s 402ms/step - accuracy: 0.6944 - loss: 0.7153 - val_accuracy: 0.7909 - val_loss: 0.5545 - learning_rate: 0.0010
+Epoch 4/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 99s 375ms/step - accuracy: 0.7028 - loss: 0.6578 - val_accuracy: 0.7861 - val_loss: 0.5510 - learning_rate: 0.0010
+Epoch 5/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 94s 357ms/step - accuracy: 0.7202 - loss: 0.6349 - val_accuracy: 0.7873 - val_loss: 0.5568 - learning_rate: 0.0010
+Epoch 6/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 94s 355ms/step - accuracy: 0.7236 - loss: 0.6048 - val_accuracy: 0.7969 - val_loss: 0.5691 - learning_rate: 0.0010
+Epoch 7/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 91s 345ms/step - accuracy: 0.7298 - loss: 0.6137 - val_accuracy: 0.7694 - val_loss: 0.5590 - learning_rate: 0.0010
+Epoch 8/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 95s 360ms/step - accuracy: 0.7475 - loss: 0.5734 - val_accuracy: 0.7802 - val_loss: 0.5566 - learning_rate: 3.0000e-04
+Epoch 9/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 100s 377ms/step - accuracy: 0.7645 - loss: 0.5461 - val_accuracy: 0.7897 - val_loss: 0.5339 - learning_rate: 3.0000e-04
+Epoch 10/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 101s 382ms/step - accuracy: 0.7702 - loss: 0.5316 - val_accuracy: 0.7730 - val_loss: 0.5671 - learning_rate: 3.0000e-04
+Epoch 11/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 97s 366ms/step - accuracy: 0.7642 - loss: 0.5371 - val_accuracy: 0.7957 - val_loss: 0.5536 - learning_rate: 3.0000e-04
+Epoch 12/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 96s 363ms/step - accuracy: 0.7568 - loss: 0.5456 - val_accuracy: 0.7969 - val_loss: 0.5359 - learning_rate: 3.0000e-04
+Epoch 13/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 96s 361ms/step - accuracy: 0.7728 - loss: 0.5289 - val_accuracy: 0.7682 - val_loss: 0.5613 - learning_rate: 9.0000e-05
+Epoch 14/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 94s 355ms/step - accuracy: 0.7709 - loss: 0.5218 - val_accuracy: 0.7539 - val_loss: 0.5687 - learning_rate: 9.0000e-05
+Epoch 15/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 92s 349ms/step - accuracy: 0.7740 - loss: 0.5221 - val_accuracy: 0.7467 - val_loss: 0.5985 - learning_rate: 9.0000e-05
+/Users/ankit/Downloads/DL/.venv/lib/python3.12/site-packages/keras/src/trainers/epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+[EfficientNetV2-B0 512px (frozen)] acc=0.8017 macroF1=0.7962 AUC=0.9190 ECE=0.0501
+Stage 2: 154 base layers trainable (from block5a)
+Epoch 1/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 289s 1s/step - accuracy: 0.7329 - loss: 0.6036 - val_accuracy: 0.7025 - val_loss: 0.7952 - learning_rate: 1.0000e-04
+Epoch 2/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 225s 847ms/step - accuracy: 0.7621 - loss: 0.5559 - val_accuracy: 0.7658 - val_loss: 0.5649 - learning_rate: 1.0000e-04
+Epoch 3/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 259s 976ms/step - accuracy: 0.7764 - loss: 0.5048 - val_accuracy: 0.8053 - val_loss: 0.4811 - learning_rate: 1.0000e-04
+Epoch 4/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 260s 979ms/step - accuracy: 0.7824 - loss: 0.4955 - val_accuracy: 0.7515 - val_loss: 0.5878 - learning_rate: 1.0000e-04
+Epoch 5/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 229s 863ms/step - accuracy: 0.7924 - loss: 0.4654 - val_accuracy: 0.8124 - val_loss: 0.4522 - learning_rate: 1.0000e-04
+Epoch 6/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 278s 1s/step - accuracy: 0.8027 - loss: 0.4663 - val_accuracy: 0.7921 - val_loss: 0.4811 - learning_rate: 1.0000e-04
+Epoch 7/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 245s 923ms/step - accuracy: 0.8025 - loss: 0.4441 - val_accuracy: 0.7945 - val_loss: 0.5150 - learning_rate: 1.0000e-04
+Epoch 8/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 231s 869ms/step - accuracy: 0.7834 - loss: 0.4796 - val_accuracy: 0.7276 - val_loss: 0.6344 - learning_rate: 1.0000e-04
+Epoch 9/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 235s 884ms/step - accuracy: 0.8290 - loss: 0.4051 - val_accuracy: 0.8244 - val_loss: 0.4803 - learning_rate: 3.0000e-05
+Epoch 10/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 258s 974ms/step - accuracy: 0.8187 - loss: 0.4077 - val_accuracy: 0.8208 - val_loss: 0.4626 - learning_rate: 3.0000e-05
+Epoch 11/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 335s 1s/step - accuracy: 0.8266 - loss: 0.3988 - val_accuracy: 0.7873 - val_loss: 0.5183 - learning_rate: 3.0000e-05
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+WARNING:tensorflow:From /Users/ankit/Downloads/DL/.venv/lib/python3.12/site-packages/tensorflow/python/profiler/internal/flops_registry.py:140: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+This API was designed for TensorFlow v1. See https://www.tensorflow.org/guide/migrate for instructions on how to migrate your code to TensorFlow v2.
+[EfficientNetV2-B0 512px (fine-tuned)] acc=0.8124 macroF1=0.8034 AUC=0.9281 ECE=0.0222
+cost: {
+  "img_size": 512,
+  "params_total": 6248019,
+  "params_trainable_final": 5707703,
+  "gflops_per_image": 7.594393733,
+  "latency_ms_batch1": 134.91818749753293,
+  "latency_ms_per_image_batch32": 30.148687500059168,
+  "variant": "B0",
+  "batch_size": 16,
+  "stage1_epochs": 15,
+  "stage2_epochs": 11,
+  "stage1_s_per_epoch_median": 95.91609514599986,
+  "stage2_s_per_epoch_median": 251.64116647899937,
+  "train_minutes_total": 71.99956781875008,
+  "peak_rss_gb": 6.71875072,
+  "unfrozen_from": "block5a",
+  "ft_lr": 0.0001
+}

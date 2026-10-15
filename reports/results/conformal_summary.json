@@ -1,0 +1,532 @@
+{
+  "model": "effnetv2_b0_224_finetuned",
+  "model_name": "EfficientNetV2-B0 224px (fine-tuned)",
+  "alpha": 0.1,
+  "n_cal": 837,
+  "n_test": 837,
+  "methods": {
+    "lac": {
+      "q_hat": [
+        0.696755122945018,
+        0.696755122945018,
+        0.696755122945018
+      ],
+      "coverage": 0.8936678614097969,
+      "avg_set_size": 1.2377538829151733,
+      "singleton_rate": 0.7622461170848268,
+      "empty_rate": 0.0,
+      "full_set_rate": 0.0,
+      "singleton_accuracy": 0.8714733542319749,
+      "per_class_coverage": {
+        "NORMAL": 0.9513274336283186,
+        "PNEUMONIA_BACTERIA": 0.9221105527638191,
+        "PNEUMONIA_VIRUS": 0.7793427230046949
+      },
+      "per_class_avg_size": {
+        "NORMAL": 1.079646017699115,
+        "PNEUMONIA_BACTERIA": 1.2839195979899498,
+        "PNEUMONIA_VIRUS": 1.3192488262910798
+      },
+      "size_distribution": {
+        "0": 0.0,
+        "1": 0.7622461170848268,
+        "2": 0.23775388291517324,
+        "3": 0.0
+      },
+      "set_composition": {
+        "Bacterial": 0.3548387096774194,
+        "Normal": 0.2520908004778972,
+        "Bacterial+Viral": 0.21385902031063322,
+        "Viral": 0.15531660692951016,
+        "Normal+Viral": 0.022700119474313024,
+        "Normal+Bacterial": 0.0011947431302270011
+      },
+      "random_split_check": {
+        "trials": 500,
+        "coverage_mean": 0.9007741935483871,
+        "coverage_std": 0.014369998473449755,
+        "coverage_min": 0.8566308243727598,
+        "frac_trials_below_target": 0.472,
+        "avg_set_size_mean": 1.2509056152927118
+      }
+    },
+    "aps": {
+      "q_hat": [
+        0.9998186691451703,
+        0.9998186691451703,
+        0.9998186691451703
+      ],
+      "coverage": 0.9080047789725209,
+      "avg_set_size": 1.5161290322580645,
+      "singleton_rate": 0.4838709677419355,
+      "empty_rate": 0.0,
+      "full_set_rate": 0.0,
+      "singleton_accuracy": 0.8419753086419753,
+      "per_class_coverage": {
+        "NORMAL": 0.9646017699115044,
+        "PNEUMONIA_BACTERIA": 0.9396984924623115,
+        "PNEUMONIA_VIRUS": 0.7887323943661971
+      },
+      "per_class_avg_size": {
+        "NORMAL": 1.6327433628318584,
+        "PNEUMONIA_BACTERIA": 1.3844221105527639,
+        "PNEUMONIA_VIRUS": 1.6384976525821595
+      },
+      "size_distribution": {
+        "0": 0.0,
+        "1": 0.4838709677419355,
+        "2": 0.5161290322580645,
+        "3": 0.0
+      },
+      "set_composition": {
+        "Bacterial+Viral": 0.3333333333333333,
+        "Bacterial": 0.3225806451612903,
+        "Normal+Viral": 0.18040621266427717,
+        "Normal": 0.0979689366786141,
+        "Viral": 0.06332138590203107,
+        "Normal+Bacterial": 0.0023894862604540022
+      },
+      "random_split_check": {
+        "trials": 500,
+        "coverage_mean": 0.9219307048984469,
+        "coverage_std": 0.011246948094243403,
+        "coverage_min": 0.8924731182795699,
+        "frac_trials_below_target": 0.04,
+        "avg_set_size_mean": 1.5491087216248507
+      }
+    },
+    "aps_randomized": {
+      "q_hat": [
+        0.8944245917947493,
+        0.8944245917947493,
+        0.8944245917947493
+      ],
+      "coverage": 0.910394265232975,
+      "avg_set_size": 1.3978494623655915,
+      "singleton_rate": 0.6188769414575866,
+      "empty_rate": 0.0,
+      "full_set_rate": 0.016726403823178016,
+      "singleton_accuracy": 0.8783783783783784,
+      "per_class_coverage": {
+        "NORMAL": 0.9646017699115044,
+        "PNEUMONIA_BACTERIA": 0.9321608040201005,
+        "PNEUMONIA_VIRUS": 0.812206572769953
+      },
+      "per_class_avg_size": {
+        "NORMAL": 1.238938053097345,
+        "PNEUMONIA_BACTERIA": 1.4422110552763818,
+        "PNEUMONIA_VIRUS": 1.483568075117371
+      },
+      "size_distribution": {
+        "0": 0.0,
+        "1": 0.6188769414575866,
+        "2": 0.3643966547192354,
+        "3": 0.016726403823178016
+      },
+      "set_composition": {
+        "Bacterial+Viral": 0.3106332138590203,
+        "Bacterial": 0.2843488649940263,
+        "Normal": 0.21505376344086022,
+        "Viral": 0.11947431302270012,
+        "Normal+Viral": 0.052568697729988054,
+        "Normal+Bacterial+Viral": 0.016726403823178016,
+        "Normal+Bacterial": 0.0011947431302270011
+      },
+      "random_split_check": {
+        "trials": 500,
+        "coverage_mean": 0.9222891278375149,
+        "coverage_std": 0.010402505968535241,
+        "coverage_min": 0.8900836320191159,
+        "frac_trials_below_target": 0.026,
+        "avg_set_size_mean": 1.4171851851851853
+      }
+    },
+    "lac_classwise": {
+      "q_hat": [
+        0.49984007328510394,
+        0.6715991493981324,
+        0.7911034473948941
+      ],
+      "coverage": 0.9008363201911589,
+      "avg_set_size": 1.3261648745519714,
+      "singleton_rate": 0.6738351254480287,
+      "empty_rate": 0.0,
+      "full_set_rate": 0.0,
+      "singleton_accuracy": 0.8652482269503546,
+      "per_class_coverage": {
+        "NORMAL": 0.911504424778761,
+        "PNEUMONIA_BACTERIA": 0.914572864321608,
+        "PNEUMONIA_VIRUS": 0.863849765258216
+      },
+      "per_class_avg_size": {
+        "NORMAL": 1.092920353982301,
+        "PNEUMONIA_BACTERIA": 1.4447236180904524,
+        "PNEUMONIA_VIRUS": 1.352112676056338
+      },
+      "size_distribution": {
+        "0": 0.0,
+        "1": 0.6738351254480287,
+        "2": 0.32616487455197135,
+        "3": 0.0
+      },
+      "set_composition": {
+        "Bacterial+Viral": 0.3010752688172043,
+        "Bacterial": 0.25686977299880526,
+        "Normal": 0.23416965352449223,
+        "Viral": 0.1827956989247312,
+        "Normal+Viral": 0.025089605734767026
+      },
+      "random_split_check": {
+        "trials": 500,
+        "coverage_mean": 0.9011493428912783,
+        "coverage_std": 0.014159866346589355,
+        "coverage_min": 0.8542413381123058,
+        "frac_trials_below_target": 0.446,
+        "avg_set_size_mean": 1.3433524492234168
+      }
+    }
+  },
+  "sweep": [
+    {
+      "alpha": 0.01,
+      "method": "lac",
+      "coverage": 0.989247311827957,
+      "avg_set_size": 1.8494623655913978,
+      "singleton_rate": 0.22580645161290322,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.9841269841269841,
+      "viral_coverage": 0.9953051643192489
+    },
+    {
+      "alpha": 0.01,
+      "method": "aps",
+      "coverage": 1.0,
+      "avg_set_size": 2.995221027479092,
+      "singleton_rate": 0.0,
+      "empty_rate": 0.0,
+      "singleton_accuracy": NaN,
+      "viral_coverage": 1.0
+    },
+    {
+      "alpha": 0.01,
+      "method": "aps_randomized",
+      "coverage": 0.985663082437276,
+      "avg_set_size": 1.909199522102748,
+      "singleton_rate": 0.20908004778972522,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.9428571428571428,
+      "viral_coverage": 0.971830985915493
+    },
+    {
+      "alpha": 0.01,
+      "method": "lac_classwise",
+      "coverage": 0.9904420549581839,
+      "avg_set_size": 1.9426523297491038,
+      "singleton_rate": 0.24611708482676226,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.9757281553398058,
+      "viral_coverage": 0.9859154929577465
+    },
+    {
+      "alpha": 0.02,
+      "method": "lac",
+      "coverage": 0.985663082437276,
+      "avg_set_size": 1.7849462365591398,
+      "singleton_rate": 0.27598566308243727,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.9696969696969697,
+      "viral_coverage": 0.9859154929577465
+    },
+    {
+      "alpha": 0.02,
+      "method": "aps",
+      "coverage": 1.0,
+      "avg_set_size": 2.995221027479092,
+      "singleton_rate": 0.0,
+      "empty_rate": 0.0,
+      "singleton_accuracy": NaN,
+      "viral_coverage": 1.0
+    },
+    {
+      "alpha": 0.02,
+      "method": "aps_randomized",
+      "coverage": 0.972520908004779,
+      "avg_set_size": 1.8243727598566308,
+      "singleton_rate": 0.26642771804062126,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.9192825112107623,
+      "viral_coverage": 0.9624413145539906
+    },
+    {
+      "alpha": 0.02,
+      "method": "lac_classwise",
+      "coverage": 0.983273596176822,
+      "avg_set_size": 1.8016726403823178,
+      "singleton_rate": 0.2855436081242533,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.9623430962343096,
+      "viral_coverage": 0.9765258215962441
+    },
+    {
+      "alpha": 0.05,
+      "method": "lac",
+      "coverage": 0.955794504181601,
+      "avg_set_size": 1.5531660692951015,
+      "singleton_rate": 0.48028673835125446,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.9203980099502488,
+      "viral_coverage": 0.9248826291079812
+    },
+    {
+      "alpha": 0.05,
+      "method": "aps",
+      "coverage": 0.948626045400239,
+      "avg_set_size": 1.7264038231780168,
+      "singleton_rate": 0.2735961768219833,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.8733624454148472,
+      "viral_coverage": 0.8685446009389671
+    },
+    {
+      "alpha": 0.05,
+      "method": "aps_randomized",
+      "coverage": 0.9414575866188769,
+      "avg_set_size": 1.6332138590203107,
+      "singleton_rate": 0.4133811230585424,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.8872832369942196,
+      "viral_coverage": 0.8967136150234741
+    },
+    {
+      "alpha": 0.05,
+      "method": "lac_classwise",
+      "coverage": 0.9474313022700119,
+      "avg_set_size": 1.5424133811230585,
+      "singleton_rate": 0.4755077658303465,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.907035175879397,
+      "viral_coverage": 0.9295774647887324
+    },
+    {
+      "alpha": 0.1,
+      "method": "lac",
+      "coverage": 0.8936678614097969,
+      "avg_set_size": 1.2377538829151733,
+      "singleton_rate": 0.7622461170848268,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.8714733542319749,
+      "viral_coverage": 0.7793427230046949
+    },
+    {
+      "alpha": 0.1,
+      "method": "aps",
+      "coverage": 0.9080047789725209,
+      "avg_set_size": 1.5161290322580645,
+      "singleton_rate": 0.4838709677419355,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.8419753086419753,
+      "viral_coverage": 0.7887323943661971
+    },
+    {
+      "alpha": 0.1,
+      "method": "aps_randomized",
+      "coverage": 0.910394265232975,
+      "avg_set_size": 1.3978494623655915,
+      "singleton_rate": 0.6188769414575866,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.8783783783783784,
+      "viral_coverage": 0.812206572769953
+    },
+    {
+      "alpha": 0.1,
+      "method": "lac_classwise",
+      "coverage": 0.9008363201911589,
+      "avg_set_size": 1.3261648745519714,
+      "singleton_rate": 0.6738351254480287,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.8652482269503546,
+      "viral_coverage": 0.863849765258216
+    },
+    {
+      "alpha": 0.15,
+      "method": "lac",
+      "coverage": 0.8470728793309439,
+      "avg_set_size": 1.0848267622461172,
+      "singleton_rate": 0.9080047789725209,
+      "empty_rate": 0.0035842293906810036,
+      "singleton_accuracy": 0.8381578947368421,
+      "viral_coverage": 0.6901408450704225
+    },
+    {
+      "alpha": 0.15,
+      "method": "aps",
+      "coverage": 0.8924731182795699,
+      "avg_set_size": 1.3918757467144565,
+      "singleton_rate": 0.6081242532855436,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.8487229862475442,
+      "viral_coverage": 0.7511737089201878
+    },
+    {
+      "alpha": 0.15,
+      "method": "aps_randomized",
+      "coverage": 0.8936678614097969,
+      "avg_set_size": 1.2700119474313023,
+      "singleton_rate": 0.7359617682198327,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.8717532467532467,
+      "viral_coverage": 0.7793427230046949
+    },
+    {
+      "alpha": 0.15,
+      "method": "lac_classwise",
+      "coverage": 0.8482676224611708,
+      "avg_set_size": 1.1696535244922341,
+      "singleton_rate": 0.8064516129032258,
+      "empty_rate": 0.011947431302270013,
+      "singleton_accuracy": 0.8296296296296296,
+      "viral_coverage": 0.7887323943661971
+    },
+    {
+      "alpha": 0.2,
+      "method": "lac",
+      "coverage": 0.7980884109916367,
+      "avg_set_size": 0.954599761051374,
+      "singleton_rate": 0.954599761051374,
+      "empty_rate": 0.04540023894862605,
+      "singleton_accuracy": 0.8360450563204005,
+      "viral_coverage": 0.6056338028169014
+    },
+    {
+      "alpha": 0.2,
+      "method": "aps",
+      "coverage": 0.8745519713261649,
+      "avg_set_size": 1.2759856630824373,
+      "singleton_rate": 0.7240143369175627,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.8481848184818482,
+      "viral_coverage": 0.7136150234741784
+    },
+    {
+      "alpha": 0.2,
+      "method": "aps_randomized",
+      "coverage": 0.8745519713261649,
+      "avg_set_size": 1.1887694145758663,
+      "singleton_rate": 0.8148148148148148,
+      "empty_rate": 0.0,
+      "singleton_accuracy": 0.8592375366568915,
+      "viral_coverage": 0.7323943661971831
+    },
+    {
+      "alpha": 0.2,
+      "method": "lac_classwise",
+      "coverage": 0.8052568697729988,
+      "avg_set_size": 1.0621266427718041,
+      "singleton_rate": 0.8614097968936678,
+      "empty_rate": 0.038231780167264036,
+      "singleton_accuracy": 0.8196948682385575,
+      "viral_coverage": 0.7605633802816901
+    }
+  ],
+  "by_model": [
+    {
+      "key": "logreg",
+      "name": "Logistic Regression (HOG)",
+      "coverage": 0.9235364396654719,
+      "avg_set_size": 1.4946236559139785,
+      "singleton_rate": 0.5221027479091995,
+      "singleton_accuracy": 0.88558352402746,
+      "viral_coverage": 0.8967136150234741
+    },
+    {
+      "key": "random_forest",
+      "name": "Random Forest (HOG)",
+      "coverage": 0.9020310633213859,
+      "avg_set_size": 1.3655913978494623,
+      "singleton_rate": 0.6475507765830346,
+      "singleton_accuracy": 0.8745387453874539,
+      "viral_coverage": 0.6995305164319249
+    },
+    {
+      "key": "cnn_scratch",
+      "name": "CNN (scratch)",
+      "coverage": 0.9008363201911589,
+      "avg_set_size": 1.3106332138590202,
+      "singleton_rate": 0.6953405017921147,
+      "singleton_accuracy": 0.8797250859106529,
+      "viral_coverage": 0.7934272300469484
+    },
+    {
+      "key": "densenet_frozen",
+      "name": "DenseNet121 (frozen)",
+      "coverage": 0.9127837514934289,
+      "avg_set_size": 1.3775388291517323,
+      "singleton_rate": 0.6439665471923537,
+      "singleton_accuracy": 0.8942486085343229,
+      "viral_coverage": 0.8028169014084507
+    },
+    {
+      "key": "densenet_finetuned",
+      "name": "DenseNet121 (fine-tuned)",
+      "coverage": 0.9056152927120669,
+      "avg_set_size": 1.2341696535244921,
+      "singleton_rate": 0.7670250896057348,
+      "singleton_accuracy": 0.8940809968847352,
+      "viral_coverage": 0.7981220657276995
+    },
+    {
+      "key": "effnetv2_b0_224_frozen",
+      "name": "EfficientNetV2-B0 224px (frozen)",
+      "coverage": 0.8924731182795699,
+      "avg_set_size": 1.3620071684587813,
+      "singleton_rate": 0.6487455197132617,
+      "singleton_accuracy": 0.8710865561694291,
+      "viral_coverage": 0.8169014084507042
+    },
+    {
+      "key": "effnetv2_b0_224_finetuned",
+      "name": "EfficientNetV2-B0 224px (fine-tuned)",
+      "coverage": 0.8936678614097969,
+      "avg_set_size": 1.2377538829151733,
+      "singleton_rate": 0.7622461170848268,
+      "singleton_accuracy": 0.8714733542319749,
+      "viral_coverage": 0.7793427230046949
+    },
+    {
+      "key": "effnetv2_b0_384_frozen",
+      "name": "EfficientNetV2-B0 384px (frozen)",
+      "coverage": 0.9056152927120669,
+      "avg_set_size": 1.3428912783751494,
+      "singleton_rate": 0.6726403823178017,
+      "singleton_accuracy": 0.8792184724689165,
+      "viral_coverage": 0.8215962441314554
+    },
+    {
+      "key": "effnetv2_b0_384_finetuned",
+      "name": "EfficientNetV2-B0 384px (fine-tuned)",
+      "coverage": 0.8924731182795699,
+      "avg_set_size": 1.2114695340501793,
+      "singleton_rate": 0.7968936678614098,
+      "singleton_accuracy": 0.8755622188905547,
+      "viral_coverage": 0.7417840375586855
+    },
+    {
+      "key": "effnetv2_b0_512_frozen",
+      "name": "EfficientNetV2-B0 512px (frozen)",
+      "coverage": 0.8960573476702509,
+      "avg_set_size": 1.3333333333333333,
+      "singleton_rate": 0.6786140979689367,
+      "singleton_accuracy": 0.8714788732394366,
+      "viral_coverage": 0.7934272300469484
+    },
+    {
+      "key": "effnetv2_b0_512_finetuned",
+      "name": "EfficientNetV2-B0 512px (fine-tuned)",
+      "coverage": 0.9115890083632019,
+      "avg_set_size": 1.2652329749103943,
+      "singleton_rate": 0.7371565113500598,
+      "singleton_accuracy": 0.8946515397082658,
+      "viral_coverage": 0.812206572769953
+    }
+  ]
+}

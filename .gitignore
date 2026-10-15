@@ -8,11 +8,12 @@ __pycache__/
 data/raw/
 data/processed/
 
-# keep only what the deployed app needs (~65 MB, under GitHub's 100 MB limit)
+# keep only what the app needs: the deployed model (EfficientNetV2-B0 224px, optimizer state
+# stripped, ~26 MB), the DenseNet121 fallback (stripped, ~31 MB) and all small JSON configs
 models_saved/*
+!models_saved/effnetv2_b0_224_finetuned.keras
 !models_saved/densenet121_finetuned.keras
-!models_saved/densenet_finetuned_temperature.json
-!models_saved/densenet_finetuned_abstain.json
+!models_saved/*.json
 !models_saved/.gitkeep
 
 reports/results/*.npy

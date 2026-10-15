@@ -1,0 +1,29 @@
+{
+ "model": "effnetv2_b0_224_finetuned",
+ "lac": {
+  "per_class_mean": [
+   0.952,
+   0.921,
+   0.811
+  ],
+  "per_class_std": [
+   0.012,
+   0.015,
+   0.03
+  ]
+ },
+ "lac_classwise": {
+  "per_class_mean": [
+   0.902,
+   0.902,
+   0.902
+  ],
+  "per_class_std": [
+   0.028,
+   0.022,
+   0.027
+  ]
+ },
+ "val_viral_score_p90": 0.786,
+ "test_viral_score_p90": 0.814
+}

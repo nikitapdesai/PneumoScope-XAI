@@ -1,0 +1,161 @@
+[
+  {
+    "res": 224,
+    "key": "effnetv2_b0_224_finetuned",
+    "val_macro_f1": 0.8193854198618685,
+    "accuracy": 0.8183990442054958,
+    "accuracy_ci": [
+      0.7933094384707288,
+      0.8434886499402628
+    ],
+    "macro_f1": 0.8091818010323952,
+    "macro_f1_ci": [
+      0.7833953400265713,
+      0.8359206966627991
+    ],
+    "roc_auc_ovr": 0.9159798286944302,
+    "ece": 0.05020348636907489,
+    "precision": {
+      "NORMAL": 0.9375,
+      "PNEUMONIA_BACTERIA": 0.8284313725490197,
+      "PNEUMONIA_VIRUS": 0.6682926829268293
+    },
+    "recall": {
+      "NORMAL": 0.9292035398230089,
+      "PNEUMONIA_BACTERIA": 0.8492462311557789,
+      "PNEUMONIA_VIRUS": 0.6431924882629108
+    },
+    "f1": {
+      "NORMAL": 0.9333333333333333,
+      "PNEUMONIA_BACTERIA": 0.8387096774193549,
+      "PNEUMONIA_VIRUS": 0.6555023923444976
+    },
+    "binary_accuracy": 0.9629629629629629,
+    "binary_auc": 0.9930188433295193,
+    "subtype_accuracy": 0.7937806873977087,
+    "subtype_macro_f1": 0.7709240876954938,
+    "img_size": 224,
+    "params_total": 6248019,
+    "params_trainable_final": 5707703,
+    "gflops_per_image": 1.455972677,
+    "latency_ms_batch1": 99.19689549860777,
+    "latency_ms_per_image_batch32": 5.905818359451587,
+    "variant": "B0",
+    "batch_size": 16,
+    "stage1_epochs": 16,
+    "stage2_epochs": 17,
+    "stage1_s_per_epoch_median": 29.663221666007303,
+    "stage2_s_per_epoch_median": 100.67444956250256,
+    "train_minutes_total": 37.0184913264003,
+    "peak_rss_gb": 5.130174464,
+    "unfrozen_from": "block5a",
+    "ft_lr": 0.0001,
+    "p_vs_lowest_res": null
+  },
+  {
+    "res": 384,
+    "key": "effnetv2_b0_384_finetuned",
+    "val_macro_f1": 0.8047572298630882,
+    "accuracy": 0.8339307048984468,
+    "accuracy_ci": [
+      0.8100358422939068,
+      0.8590203106332138
+    ],
+    "macro_f1": 0.8172251754917497,
+    "macro_f1_ci": [
+      0.790110948576182,
+      0.8439431629513866
+    ],
+    "roc_auc_ovr": 0.9239930742035639,
+    "ece": 0.049255802889166506,
+    "precision": {
+      "NORMAL": 0.9194915254237288,
+      "PNEUMONIA_BACTERIA": 0.8240740740740741,
+      "PNEUMONIA_VIRUS": 0.7396449704142012
+    },
+    "recall": {
+      "NORMAL": 0.9601769911504425,
+      "PNEUMONIA_BACTERIA": 0.8944723618090452,
+      "PNEUMONIA_VIRUS": 0.5868544600938967
+    },
+    "f1": {
+      "NORMAL": 0.9393939393939394,
+      "PNEUMONIA_BACTERIA": 0.8578313253012049,
+      "PNEUMONIA_VIRUS": 0.6544502617801047
+    },
+    "binary_accuracy": 0.9689366786140979,
+    "binary_auc": 0.9941775415320888,
+    "subtype_accuracy": 0.8117839607201309,
+    "subtype_macro_f1": 0.7837474339916473,
+    "img_size": 384,
+    "params_total": 6248019,
+    "params_trainable_final": 5707703,
+    "gflops_per_image": 4.273122437,
+    "latency_ms_batch1": 96.81677050684812,
+    "latency_ms_per_image_batch32": 11.099365218797175,
+    "variant": "B0",
+    "batch_size": 16,
+    "stage1_epochs": 8,
+    "stage2_epochs": 11,
+    "stage1_s_per_epoch_median": 75.46272129099816,
+    "stage2_s_per_epoch_median": 182.63216160400043,
+    "train_minutes_total": 44.86919816388302,
+    "peak_rss_gb": 5.769592832,
+    "unfrozen_from": "block5a",
+    "ft_lr": 0.0001,
+    "p_vs_lowest_res": 0.12991792302255253
+  },
+  {
+    "res": 512,
+    "key": "effnetv2_b0_512_finetuned",
+    "val_macro_f1": 0.8094233834688671,
+    "accuracy": 0.8255675029868578,
+    "accuracy_ci": [
+      0.8028673835125448,
+      0.8506571087216248
+    ],
+    "macro_f1": 0.8141537492352517,
+    "macro_f1_ci": [
+      0.7906366144613938,
+      0.8408524671733391
+    ],
+    "roc_auc_ovr": 0.9284557715202273,
+    "ece": 0.035734236169174746,
+    "precision": {
+      "NORMAL": 0.9490740740740741,
+      "PNEUMONIA_BACTERIA": 0.8148148148148148,
+      "PNEUMONIA_VIRUS": 0.708994708994709
+    },
+    "recall": {
+      "NORMAL": 0.9070796460176991,
+      "PNEUMONIA_BACTERIA": 0.8844221105527639,
+      "PNEUMONIA_VIRUS": 0.6291079812206573
+    },
+    "f1": {
+      "NORMAL": 0.9276018099547512,
+      "PNEUMONIA_BACTERIA": 0.8481927710843373,
+      "PNEUMONIA_VIRUS": 0.6666666666666666
+    },
+    "binary_accuracy": 0.9605734767025089,
+    "binary_auc": 0.9945179091290934,
+    "subtype_accuracy": 0.8101472995090017,
+    "subtype_macro_f1": 0.7833174358598087,
+    "img_size": 512,
+    "params_total": 6248019,
+    "params_trainable_final": 5707703,
+    "gflops_per_image": 7.594393733,
+    "latency_ms_batch1": 93.55997899547219,
+    "latency_ms_per_image_batch32": 20.193622390479504,
+    "variant": "B0",
+    "batch_size": 16,
+    "stage1_epochs": 8,
+    "stage2_epochs": 11,
+    "stage1_s_per_epoch_median": 109.12711904100433,
+    "stage2_s_per_epoch_median": 242.74740289599868,
+    "train_minutes_total": 60.21079720000004,
+    "peak_rss_gb": 7.431405568,
+    "unfrozen_from": "block5a",
+    "ft_lr": 0.0001,
+    "p_vs_lowest_res": 0.52577336017565
+  }
+]

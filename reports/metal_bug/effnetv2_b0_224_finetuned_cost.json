@@ -1,0 +1,18 @@
+{
+  "img_size": 224,
+  "params_total": 6248019,
+  "params_trainable_final": 5707703,
+  "gflops_per_image": 1.455972677,
+  "latency_ms_batch1": 93.51362499728566,
+  "latency_ms_per_image_batch32": 5.886932937301026,
+  "variant": "B0",
+  "batch_size": 16,
+  "stage1_epochs": 8,
+  "stage2_epochs": 14,
+  "stage1_s_per_epoch_median": 13.642634749994613,
+  "stage2_s_per_epoch_median": 60.44196516700322,
+  "train_minutes_total": 15.95219249096699,
+  "peak_rss_gb": 3.933257728,
+  "unfrozen_from": "block5a",
+  "ft_lr": 0.0001
+}

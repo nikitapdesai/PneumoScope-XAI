@@ -27,6 +27,17 @@ IMG_SIZE = 224
 BATCH_SIZE = 32
 USE_CLAHE = True          # contrast-limited histogram equalisation, applied in train AND inference
 
+# EfficientNetV2 resolution study (A)
+EFFNET_VARIANT = "B0"
+EFFNET_RESOLUTIONS = (224, 384, 512)
+EFFNET_UNFREEZE_FROM = "block5a"   # stage 2 fine-tunes block5a..top
+EFFNET_BATCH_SIZE = 16             # same at every resolution (512px at 32 risks running out of memory)
+
+# Conformal prediction (C): miscoverage alpha -> sets cover the true class with prob >= 1 - alpha
+CONFORMAL_ALPHA = 0.10
+CONFORMAL_ALPHAS = (0.01, 0.02, 0.05, 0.10, 0.15, 0.20)
+CONFORMAL_METHOD = "lac"           # score used by the app: "lac", "aps" or "lac_classwise"
+
 # Classical ML
 ML_IMG_SIZE = 128
 HOG_PARAMS = dict(orientations=9, pixels_per_cell=(16, 16), cells_per_block=(2, 2))

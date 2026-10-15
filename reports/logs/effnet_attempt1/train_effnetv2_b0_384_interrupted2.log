@@ -1,0 +1,56 @@
+2026-10-14 20:45:08.332959: I metal_plugin/src/device/metal_device.cc:1154] Metal device set to: Apple M5
+2026-10-14 20:45:08.333018: I metal_plugin/src/device/metal_device.cc:296] systemMemory: 16.00 GB
+2026-10-14 20:45:08.333025: I metal_plugin/src/device/metal_device.cc:313] maxCacheSize: 5.92 GB
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+/Users/ankit/Downloads/DL/.venv/lib/python3.12/site-packages/keras/src/trainers/epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+GPUs: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+class weights: {0: 1.2336283185840708, 1: 0.7022670025188917, 2: 1.3064667291471415}
+Epoch 1/25
+2026-10-14 20:45:09.491210: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:117] Plugin optimizer for device_type GPU is enabled.
+262/262 ━━━━━━━━━━━━━━━━━━━━ 54s 162ms/step - accuracy: 0.5851 - loss: 1.0934 - val_accuracy: 0.6822 - val_loss: 0.7610 - learning_rate: 0.0010
+Epoch 2/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 60s 227ms/step - accuracy: 0.6652 - loss: 0.8222 - val_accuracy: 0.7694 - val_loss: 0.5901 - learning_rate: 0.0010
+Epoch 3/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 65s 244ms/step - accuracy: 0.6958 - loss: 0.7119 - val_accuracy: 0.7694 - val_loss: 0.6129 - learning_rate: 0.0010
+Epoch 4/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 60s 227ms/step - accuracy: 0.7042 - loss: 0.6621 - val_accuracy: 0.7814 - val_loss: 0.5723 - learning_rate: 0.0010
+Epoch 5/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 57s 216ms/step - accuracy: 0.7178 - loss: 0.6205 - val_accuracy: 0.7551 - val_loss: 0.6094 - learning_rate: 0.0010
+Epoch 6/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 59s 222ms/step - accuracy: 0.7312 - loss: 0.6116 - val_accuracy: 0.7742 - val_loss: 0.6157 - learning_rate: 0.0010
+Epoch 7/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 56s 213ms/step - accuracy: 0.7286 - loss: 0.6030 - val_accuracy: 0.6870 - val_loss: 0.6554 - learning_rate: 0.0010
+Epoch 8/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 55s 208ms/step - accuracy: 0.7492 - loss: 0.5733 - val_accuracy: 0.7443 - val_loss: 0.5941 - learning_rate: 3.0000e-04
+Epoch 9/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 55s 210ms/step - accuracy: 0.7645 - loss: 0.5472 - val_accuracy: 0.7467 - val_loss: 0.5783 - learning_rate: 3.0000e-04
+Epoch 10/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 56s 211ms/step - accuracy: 0.7616 - loss: 0.5436 - val_accuracy: 0.7527 - val_loss: 0.5906 - learning_rate: 3.0000e-04
+/Users/ankit/Downloads/DL/.venv/lib/python3.12/site-packages/keras/src/trainers/epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+[EfficientNetV2-B0 384px (frozen)] acc=0.7730 macroF1=0.7582 AUC=0.9101 ECE=0.0407
+Stage 2: 154 base layers trainable (from block5a)
+Epoch 1/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 151s 536ms/step - accuracy: 0.7284 - loss: 0.6201 - val_accuracy: 0.7730 - val_loss: 0.5570 - learning_rate: 1.0000e-04
+Epoch 2/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 134s 508ms/step - accuracy: 0.7573 - loss: 0.5497 - val_accuracy: 0.8065 - val_loss: 0.5016 - learning_rate: 1.0000e-04
+Epoch 3/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 139s 525ms/step - accuracy: 0.7867 - loss: 0.4876 - val_accuracy: 0.8196 - val_loss: 0.4665 - learning_rate: 1.0000e-04
+Epoch 4/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 142s 535ms/step - accuracy: 0.7853 - loss: 0.4713 - val_accuracy: 0.7742 - val_loss: 0.6012 - learning_rate: 1.0000e-04
+Epoch 5/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 145s 547ms/step - accuracy: 0.8111 - loss: 0.4549 - val_accuracy: 0.8280 - val_loss: 0.4482 - learning_rate: 1.0000e-04
+Epoch 6/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 147s 557ms/step - accuracy: 0.8046 - loss: 0.4664 - val_accuracy: 0.8232 - val_loss: 0.4342 - learning_rate: 1.0000e-04
+Epoch 7/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 147s 557ms/step - accuracy: 0.8034 - loss: 0.4423 - val_accuracy: 0.8148 - val_loss: 0.5019 - learning_rate: 1.0000e-04
+Epoch 8/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 129s 486ms/step - accuracy: 0.8075 - loss: 0.4323 - val_accuracy: 0.8172 - val_loss: 0.4587 - learning_rate: 1.0000e-04
+Epoch 9/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 122s 460ms/step - accuracy: 0.7917 - loss: 0.4708 - val_accuracy: 0.8100 - val_loss: 0.4659 - learning_rate: 1.0000e-04
+Epoch 10/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 124s 469ms/step - accuracy: 0.8238 - loss: 0.4009 - val_accuracy: 0.8184 - val_loss: 0.4839 - learning_rate: 3.0000e-05
+Epoch 11/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 134s 507ms/step - accuracy: 0.8288 - loss: 0.4025 - val_accuracy: 0.8053 - val_loss: 0.4729 - learning_rate: 3.0000e-05
+Epoch 12/25

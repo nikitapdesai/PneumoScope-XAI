@@ -4,7 +4,8 @@ Saves:
   reports/figures/gradcam_grid_<model>.png  (per class: correct and wrong examples)
   reports/gradcam_analysis.md               (border-attention stats)
 
-Usage: python -m src.evaluation.gradcam_report [--model densenet_finetuned] [--max 400]
+Usage: python -m src.evaluation.gradcam_report [--model <registry key>] [--max 400]
+       (default model = the deployed one, models_saved/deployed.json)
 """
 import argparse
 
@@ -16,25 +17,25 @@ import pandas as pd
 import tensorflow as tf
 
 from src.data.preprocess import path_to_model_input
+from src.evaluation.conformal import deployed_key
 from src.evaluation.metrics import SHORT, load_probs
-from src.models import cnn_scratch
 from src.models.gradcam import border_attention, gradcam, overlay
+from src.models.registry import BY_KEY
 from src.utils import config as C
 
-MODEL_FILES = {
-    "densenet_finetuned": ("densenet121_finetuned.keras", C.GRADCAM_LAYER),
-    "cnn_scratch": ("cnn_scratch.keras", cnn_scratch.GRADCAM_LAYER),
-}
+CAM_MODELS = [k for k, s in BY_KEY.items() if s.gradcam_layer and s.file]
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", default="densenet_finetuned", choices=list(MODEL_FILES))
+    ap.add_argument("--model", default=None, choices=CAM_MODELS)
     ap.add_argument("--max", type=int, default=400, help="test images to audit (Grad-CAM is one backward pass each)")
     args = ap.parse_args()
 
-    fname, layer = MODEL_FILES[args.model]
-    model = tf.keras.models.load_model(C.MODELS_DIR / fname)
+    args.model = args.model or deployed_key()
+    spec = BY_KEY[args.model]
+    layer, size = spec.gradcam_layer, spec.img_size
+    model = tf.keras.models.load_model(C.MODELS_DIR / spec.file)
 
     df = pd.read_csv(C.MANIFEST_PATH)
     test = df[df["split"] == "test"].reset_index(drop=True)
@@ -52,7 +53,7 @@ def main():
         rows += list(sub[~sub["correct"]].nlargest(2, "conf").itertuples())
     fig, axes = plt.subplots(len(rows), 2, figsize=(6, 3 * len(rows)))
     for r, row in enumerate(rows):
-        img = path_to_model_input(row.abspath)
+        img = path_to_model_input(row.abspath, size)
         cam, p = gradcam(model, img, layer)
         axes[r, 0].imshow(img.astype(np.uint8))
         axes[r, 1].imshow(overlay(img, cam))
@@ -69,7 +70,7 @@ def main():
 
     # ---------- audit: where does the model look? ----------
     sample = test.sample(min(args.max, len(test)), random_state=C.SEED)
-    sample["border_attention"] = [border_attention(gradcam(model, path_to_model_input(p), layer)[0])
+    sample["border_attention"] = [border_attention(gradcam(model, path_to_model_input(p, size), layer)[0])
                                   for p in sample["abspath"]]
     by_class = sample.groupby("label")["border_attention"].mean()
     by_correct = sample.groupby("correct")["border_attention"].mean()

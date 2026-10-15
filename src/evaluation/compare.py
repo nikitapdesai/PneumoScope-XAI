@@ -1,6 +1,8 @@
 """Build reports/model_comparison.md from every model's saved predictions.
 
-Also runs the "beyond accuracy" analyses on the best model:
+Also picks the model to deploy (highest VALIDATION macro-F1 among fine-tuned
+models; the test set is never used for this choice), writes it to
+models_saved/deployed.json, and runs the "beyond accuracy" analyses on it:
 temperature-scaling calibration, selective prediction, McNemar significance
 tests, and the binary-vs-subtype breakdown.
 
@@ -17,16 +19,10 @@ from sklearn.metrics import f1_score, roc_auc_score
 from src.evaluation.metrics import compute_metrics, expected_calibration_error, load_probs, plot_reliability
 from src.evaluation.selective import at_threshold, plot_risk_coverage, threshold_for_accuracy
 from src.models.calibration import apply_temperature, fit_temperature, save_temperature
+from src.models.registry import BY_KEY, SPECS
 from src.utils import config as C
 
-MODELS = [
-    ("logreg", "Logistic Regression (HOG)", "classical baseline"),
-    ("random_forest", "Random Forest (HOG)", "classical baseline"),
-    ("cnn_scratch", "CNN (scratch)", "learned features"),
-    ("densenet_frozen", "DenseNet121 (frozen)", "transfer, stage 1"),
-    ("densenet_finetuned", "DenseNet121 (fine-tuned)", "transfer, stage 2"),
-]
-BEST = "densenet_finetuned"
+MODELS = [(s.key, s.name, s.note) for s in SPECS]
 TARGET_ACCS = (0.97, 0.95, 0.90, 0.85)
 
 
@@ -84,8 +80,16 @@ def main():
     if not available:
         raise SystemExit("No saved predictions in reports/results/. Train some models first.")
     probs = {k: load_probs(k, "test") for k, _, _ in available}
-    best = BEST if BEST in probs else max(probs, key=lambda k: f1_score(y_te, probs[k].argmax(1), average="macro"))
-    best_name = dict((k, n) for k, n, _ in MODELS)[best]
+    val_f1 = {k: f1_score(y_val, load_probs(k, "val").argmax(1), average="macro") for k, _, _ in available}
+    candidates = [k for k, _, _ in available if BY_KEY[k].deployable] or [k for k, _, _ in available]
+    best = max(candidates, key=val_f1.get)
+    best_name = BY_KEY[best].name
+    spec = BY_KEY[best]
+    (C.MODELS_DIR / "deployed.json").write_text(json.dumps({
+        "key": best, "name": best_name, "file": spec.file, "img_size": spec.img_size,
+        "gradcam_layer": spec.gradcam_layer, "selected_by": "highest validation macro-F1 among fine-tuned models",
+        "val_macro_f1": val_f1[best]}, indent=2))
+    print(f"Deployed model: {best_name} (val macro-F1 {val_f1[best]:.4f})")
 
     lines = [
         "# Model comparison",
@@ -93,21 +97,25 @@ def main():
         f"Test set: {len(y_te)} X-rays, patient-disjoint from train/val. "
         "95% bootstrap confidence intervals in brackets. p = McNemar test vs the best model.",
         "",
-        "| Model | Accuracy | Macro-F1 | ROC-AUC (OvR) | ECE ↓ | p vs best | Notes |",
-        "|---|---|---|---|---|---|---|",
+        f"**Best model = {best_name}**, chosen by validation macro-F1 ({val_f1[best]:.3f}) among fine-tuned models, "
+        "so the test set played no part in the choice.",
+        "",
+        "| Model | Val macro-F1 | Accuracy | Macro-F1 | ROC-AUC (OvR) | ECE ↓ | p vs best | Notes |",
+        "|---|---|---|---|---|---|---|---|",
     ]
-    summary = {"test_n": int(len(y_te)), "best": best_name, "models": []}
+    summary = {"test_n": int(len(y_te)), "best": best_name, "best_key": best, "models": []}
     for k, name, note in available:
         m = compute_metrics(y_te, probs[k])
         pval = None if k == best else mcnemar(y_te, probs[k], probs[best])
         p = "—" if pval is None else f"{pval:.2g}"
         summary["models"].append({"key": k, "name": name, "note": note, "is_best": k == best, "p_vs_best": pval,
+                                  "val_macro_f1": val_f1[k],
                                   **{f: m[f] for f in ("accuracy", "accuracy_ci", "macro_f1", "macro_f1_ci",
                                                        "roc_auc_ovr", "roc_auc_ovr_ci", "ece")},
                                   "per_class_f1": {c: m["per_class"][c]["f1-score"] for c in C.CLASS_NAMES},
                                   **binary_and_subtype(y_te, probs[k])})
         bold = "**" if k == best else ""
-        lines.append(f"| {bold}{name}{bold} | {fmt_ci(m['accuracy'], m['accuracy_ci'])} | "
+        lines.append(f"| {bold}{name}{bold} | {val_f1[k]:.3f} | {fmt_ci(m['accuracy'], m['accuracy_ci'])} | "
                      f"{fmt_ci(m['macro_f1'], m['macro_f1_ci'])} | {fmt_ci(m['roc_auc_ovr'], m['roc_auc_ovr_ci'])} | "
                      f"{m['ece']:.3f} | {p} | {note} |")
 
@@ -138,8 +146,9 @@ def main():
               f"| After temperature scaling | {expected_calibration_error(y_te, p_cal):.3f} |",
               ""]
     if expected_calibration_error(y_te, p_cal) >= expected_calibration_error(y_te, probs[best]):
-        lines += [f"T is close to 1, so the fine-tuned model was already well calibrated. "
-                  "Scaling does not improve test ECE here; the small difference is within val/test noise.", ""]
+        why = ("T is close to 1, so the model was already well calibrated. " if abs(T - 1) < 0.15 else "")
+        lines += [why + "Scaling does not improve test ECE here; the temperature fitted on validation "
+                  "does not transfer to the test split.", ""]
     lines += ["![reliability](figures/reliability_best.png)"]
 
     # --- selective prediction with calibrated probabilities ---
@@ -158,7 +167,9 @@ def main():
                               "ece_after": expected_calibration_error(y_te, p_cal)}
     summary["selective"] = {"target_accuracy": target, **sel}
     (C.RESULTS_DIR / "summary.json").write_text(json.dumps(summary, indent=2))
-    plot_risk_coverage(y_te, {name: probs[k] for k, name, _ in available}, C.FIGURES_DIR / "risk_coverage.png")
+    # stage-1 (frozen) models are left out of the plot to keep it readable
+    plot_risk_coverage(y_te, {name: probs[k] for k, name, _ in available if not k.endswith("_frozen")},
+                       C.FIGURES_DIR / "risk_coverage.png")
     how = (f"chosen on validation to reach {target:.0%} accuracy on answered cases" if target
            else "default (no accuracy target reachable at ≥50% coverage on validation)")
     lines += ["", "## Selective prediction (\"refer to radiologist\")", "",

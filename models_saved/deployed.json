@@ -1,0 +1,9 @@
+{
+  "key": "effnetv2_b0_224_finetuned",
+  "name": "EfficientNetV2-B0 224px (fine-tuned)",
+  "file": "effnetv2_b0_224_finetuned.keras",
+  "img_size": 224,
+  "gradcam_layer": "top_activation",
+  "selected_by": "highest validation macro-F1 among fine-tuned models",
+  "val_macro_f1": 0.8193854198618685
+}

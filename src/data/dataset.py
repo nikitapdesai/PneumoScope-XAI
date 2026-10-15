@@ -27,22 +27,26 @@ def build_augmenter() -> tf.keras.Sequential:
     ], name="augment")
 
 
-def _load_gray(path, label):
-    img = tf.numpy_function(lambda p: prepare_gray(load_gray(p.decode())), [path], tf.uint8)
-    img.set_shape((C.IMG_SIZE, C.IMG_SIZE))
-    return img, label
+def _gray_loader(img_size: int):
+    def _load_gray(path, label):
+        img = tf.numpy_function(lambda p: prepare_gray(load_gray(p.decode()), size=img_size), [path], tf.uint8)
+        img.set_shape((img_size, img_size))
+        return img, label
+    return _load_gray
 
 
 def _to_rgb_float(img, label):
     return tf.cast(tf.repeat(img[..., None], 3, axis=-1), tf.float32), label
 
 
-def make_dataset(df: pd.DataFrame, split: str, augment: bool = False,
-                 batch_size: int = C.BATCH_SIZE, shuffle: bool | None = None) -> tf.data.Dataset:
+def make_dataset(df: pd.DataFrame, split: str, augment: bool = False, batch_size: int = C.BATCH_SIZE,
+                 shuffle: bool | None = None, img_size: int = C.IMG_SIZE) -> tf.data.Dataset:
+    """Batched (image, label) pairs; images are (img_size, img_size, 3) float32 in [0, 255]."""
     part = df[df["split"] == split]
     ds = tf.data.Dataset.from_tensor_slices((part["abspath"].values, part["label_idx"].values.astype("int32")))
-    # Decode + CLAHE once and cache as 224x224 uint8 grayscale (~300 MB for the whole dataset).
-    ds = ds.map(_load_gray, num_parallel_calls=AUTOTUNE).cache()
+    # Decode + CLAHE once and cache as uint8 grayscale: ~300 MB for the whole dataset at 224px,
+    # ~1.5 GB at 512px. The 3-channel float copy is made per batch, after the cache.
+    ds = ds.map(_gray_loader(img_size), num_parallel_calls=AUTOTUNE).cache()
     if shuffle if shuffle is not None else split == "train":
         ds = ds.shuffle(len(part), seed=C.SEED, reshuffle_each_iteration=True)
     ds = ds.map(_to_rgb_float, num_parallel_calls=AUTOTUNE).batch(batch_size)

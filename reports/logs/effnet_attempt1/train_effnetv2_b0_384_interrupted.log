@@ -1,0 +1,26 @@
+2026-10-14 20:35:10.045683: I metal_plugin/src/device/metal_device.cc:1154] Metal device set to: Apple M5
+2026-10-14 20:35:10.045745: I metal_plugin/src/device/metal_device.cc:296] systemMemory: 16.00 GB
+2026-10-14 20:35:10.045753: I metal_plugin/src/device/metal_device.cc:313] maxCacheSize: 5.92 GB
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+/Users/ankit/Downloads/DL/.venv/lib/python3.12/site-packages/keras/src/trainers/epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+GPUs: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+class weights: {0: 1.2336283185840708, 1: 0.7022670025188917, 2: 1.3064667291471415}
+Epoch 1/25
+2026-10-14 20:35:11.268036: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:117] Plugin optimizer for device_type GPU is enabled.
+2026-10-14 20:35:23.861339: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:450] ShuffleDatasetV3:3: Filling up shuffle buffer (this may take a while): 2632 of 4182
+2026-10-14 20:35:27.702866: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:480] Shuffle buffer filled.
+262/262 ━━━━━━━━━━━━━━━━━━━━ 89s 270ms/step - accuracy: 0.5930 - loss: 1.0879 - val_accuracy: 0.6965 - val_loss: 0.7454 - learning_rate: 0.0010
+Epoch 2/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 64s 244ms/step - accuracy: 0.6669 - loss: 0.8239 - val_accuracy: 0.7766 - val_loss: 0.5683 - learning_rate: 0.0010
+Epoch 3/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 64s 244ms/step - accuracy: 0.6927 - loss: 0.7238 - val_accuracy: 0.7766 - val_loss: 0.5647 - learning_rate: 0.0010
+Epoch 4/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 64s 245ms/step - accuracy: 0.7085 - loss: 0.6745 - val_accuracy: 0.7814 - val_loss: 0.5520 - learning_rate: 0.0010
+Epoch 5/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 65s 245ms/step - accuracy: 0.7186 - loss: 0.6285 - val_accuracy: 0.7766 - val_loss: 0.5409 - learning_rate: 0.0010
+Epoch 6/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 64s 245ms/step - accuracy: 0.7317 - loss: 0.6162 - val_accuracy: 0.7897 - val_loss: 0.5402 - learning_rate: 0.0010
+Epoch 7/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 64s 241ms/step - accuracy: 0.7327 - loss: 0.6097 - val_accuracy: 0.6714 - val_loss: 0.6784 - learning_rate: 0.0010
+Epoch 8/25

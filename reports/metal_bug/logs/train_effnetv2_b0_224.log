@@ -1,0 +1,80 @@
+2026-10-15 10:42:15.515199: I metal_plugin/src/device/metal_device.cc:1154] Metal device set to: Apple M5
+2026-10-15 10:42:15.515264: I metal_plugin/src/device/metal_device.cc:296] systemMemory: 16.00 GB
+2026-10-15 10:42:15.515271: I metal_plugin/src/device/metal_device.cc:313] maxCacheSize: 5.92 GB
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+/Users/ankit/Downloads/DL/.venv/lib/python3.12/site-packages/keras/src/trainers/epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+GPUs: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+class weights: {0: 1.2336283185840708, 1: 0.7022670025188917, 2: 1.3064667291471415}
+Epoch 1/25
+2026-10-15 10:42:16.773529: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:117] Plugin optimizer for device_type GPU is enabled.
+262/262 ━━━━━━━━━━━━━━━━━━━━ 27s 62ms/step - accuracy: 0.6035 - loss: 1.0720 - val_accuracy: 0.6858 - val_loss: 0.7782 - learning_rate: 0.0010
+Epoch 2/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 14s 53ms/step - accuracy: 0.6640 - loss: 0.8566 - val_accuracy: 0.7646 - val_loss: 0.5752 - learning_rate: 0.0010
+Epoch 3/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 14s 52ms/step - accuracy: 0.6829 - loss: 0.7587 - val_accuracy: 0.7551 - val_loss: 0.5885 - learning_rate: 0.0010
+Epoch 4/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 14s 51ms/step - accuracy: 0.7056 - loss: 0.6723 - val_accuracy: 0.7479 - val_loss: 0.6075 - learning_rate: 0.0010
+Epoch 5/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 13s 51ms/step - accuracy: 0.7176 - loss: 0.6297 - val_accuracy: 0.7443 - val_loss: 0.6107 - learning_rate: 0.0010
+Epoch 6/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 14s 51ms/step - accuracy: 0.7334 - loss: 0.5934 - val_accuracy: 0.7611 - val_loss: 0.5784 - learning_rate: 3.0000e-04
+Epoch 7/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 14s 52ms/step - accuracy: 0.7401 - loss: 0.5754 - val_accuracy: 0.7611 - val_loss: 0.5782 - learning_rate: 3.0000e-04
+Epoch 8/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 15s 57ms/step - accuracy: 0.7480 - loss: 0.5617 - val_accuracy: 0.7527 - val_loss: 0.5847 - learning_rate: 3.0000e-04
+/Users/ankit/Downloads/DL/.venv/lib/python3.12/site-packages/keras/src/trainers/epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+[EfficientNetV2-B0 224px (frozen)] acc=0.7718 macroF1=0.7590 AUC=0.9021 ECE=0.0317
+Stage 2: 154 base layers trainable (from block5a)
+Epoch 1/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 64s 204ms/step - accuracy: 0.7030 - loss: 0.6657 - val_accuracy: 0.7802 - val_loss: 0.5274 - learning_rate: 1.0000e-04
+Epoch 2/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 50s 190ms/step - accuracy: 0.7429 - loss: 0.5813 - val_accuracy: 0.7503 - val_loss: 0.5666 - learning_rate: 1.0000e-04
+Epoch 3/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 56s 210ms/step - accuracy: 0.7568 - loss: 0.5485 - val_accuracy: 0.8005 - val_loss: 0.4759 - learning_rate: 1.0000e-04
+Epoch 4/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 56s 214ms/step - accuracy: 0.7633 - loss: 0.5229 - val_accuracy: 0.7909 - val_loss: 0.5059 - learning_rate: 1.0000e-04
+Epoch 5/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 57s 216ms/step - accuracy: 0.7834 - loss: 0.4779 - val_accuracy: 0.8017 - val_loss: 0.5267 - learning_rate: 1.0000e-04
+Epoch 6/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 59s 223ms/step - accuracy: 0.7915 - loss: 0.4721 - val_accuracy: 0.7563 - val_loss: 0.5644 - learning_rate: 1.0000e-04
+Epoch 7/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 61s 231ms/step - accuracy: 0.8128 - loss: 0.4292 - val_accuracy: 0.7622 - val_loss: 0.5610 - learning_rate: 3.0000e-05
+Epoch 8/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 60s 226ms/step - accuracy: 0.8092 - loss: 0.4276 - val_accuracy: 0.8053 - val_loss: 0.4700 - learning_rate: 3.0000e-05
+Epoch 9/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 60s 230ms/step - accuracy: 0.8080 - loss: 0.4374 - val_accuracy: 0.7849 - val_loss: 0.5283 - learning_rate: 3.0000e-05
+Epoch 10/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 61s 231ms/step - accuracy: 0.7944 - loss: 0.4363 - val_accuracy: 0.8076 - val_loss: 0.4765 - learning_rate: 3.0000e-05
+Epoch 11/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 61s 233ms/step - accuracy: 0.8094 - loss: 0.4150 - val_accuracy: 0.7945 - val_loss: 0.5136 - learning_rate: 3.0000e-05
+Epoch 12/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 62s 236ms/step - accuracy: 0.8147 - loss: 0.4010 - val_accuracy: 0.7861 - val_loss: 0.5402 - learning_rate: 9.0000e-06
+Epoch 13/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 62s 236ms/step - accuracy: 0.8283 - loss: 0.3802 - val_accuracy: 0.7873 - val_loss: 0.5328 - learning_rate: 9.0000e-06
+Epoch 14/25
+262/262 ━━━━━━━━━━━━━━━━━━━━ 63s 239ms/step - accuracy: 0.8297 - loss: 0.3886 - val_accuracy: 0.7957 - val_loss: 0.5171 - learning_rate: 9.0000e-06
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+WARNING:tensorflow:From /Users/ankit/Downloads/DL/.venv/lib/python3.12/site-packages/tensorflow/python/profiler/internal/flops_registry.py:140: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+This API was designed for TensorFlow v1. See https://www.tensorflow.org/guide/migrate for instructions on how to migrate your code to TensorFlow v2.
+[EfficientNetV2-B0 224px (fine-tuned)] acc=0.8076 macroF1=0.8004 AUC=0.9245 ECE=0.0451
+cost: {
+  "img_size": 224,
+  "params_total": 6248019,
+  "params_trainable_final": 5707703,
+  "gflops_per_image": 1.455972677,
+  "latency_ms_batch1": 93.51362499728566,
+  "latency_ms_per_image_batch32": 5.886932937301026,
+  "variant": "B0",
+  "batch_size": 16,
+  "stage1_epochs": 8,
+  "stage2_epochs": 14,
+  "stage1_s_per_epoch_median": 13.642634749994613,
+  "stage2_s_per_epoch_median": 60.44196516700322,
+  "train_minutes_total": 15.95219249096699,
+  "peak_rss_gb": 3.933257728,
+  "unfrozen_from": "block5a",
+  "ft_lr": 0.0001
+}

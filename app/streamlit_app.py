@@ -53,9 +53,18 @@ with tab_predict:
             st.warning(str(e))
             st.stop()
 
+        levels = predictor.conformal_levels()
+        coverage = None
+        if levels:
+            with left:
+                coverage = st.select_slider(
+                    "Guaranteed coverage of the prediction set", options=levels,
+                    value=round(1 - C.CONFORMAL_ALPHA, 2), format_func=lambda v: f"{v:.0%}",
+                    help="Conformal prediction: across X-rays like the calibration set, the true diagnosis is inside "
+                         "the returned set at least this often. Higher = safer but larger sets.")
         image = np.array(Image.open(source).convert("L"))
         with st.spinner("Analysing…"):
-            pred = predictor.predict(image)
+            pred = predictor.predict(image, coverage)
 
         with left:
             if pred.abstain:
@@ -64,6 +73,16 @@ with tab_predict:
                            "Refer to a radiologist.")
             else:
                 st.success(f"**{PRETTY[pred.label]}** ({pred.confidence:.0%} calibrated confidence)")
+            if pred.prediction_set:
+                labels = " · ".join(PRETTY[c] for c in pred.prediction_set)
+                if len(pred.prediction_set) == 1:
+                    st.info(f"**Conformal set ({pred.coverage:.0%}):** {labels}  \nOnly one diagnosis is plausible.")
+                else:
+                    st.info(f"**Conformal set ({pred.coverage:.0%}):** {labels}  \n"
+                            f"The model cannot rule these out at this guarantee level.")
+            elif predictor.conformal:
+                st.info(f"**Conformal set ({pred.coverage:.0%}):** empty: the image looks unlike any class the model "
+                        "was calibrated on. Treat as out-of-distribution.")
             st.bar_chart(pd.DataFrame({"probability": pred.probs},
                                       index=[PRETTY[c] for c in C.CLASS_NAMES]), horizontal=True)
             if pred.border_attention > 0.5:
@@ -74,11 +93,15 @@ with tab_predict:
 
         with right:
             c1, c2 = st.columns(2)
-            c1.image(pred.model_input, caption="Pre-processed input (CLAHE, 224×224)", width="stretch")
+            size = predictor.spec.img_size
+            c1.image(pred.model_input, caption=f"Pre-processed input (CLAHE, {size}×{size})", width="stretch")
             c2.image(pred.heatmap_overlay, caption="Grad-CAM: where the model looked", width="stretch")
+            st.caption(f"Model: {predictor.name}")
 
 SHORT_NAMES = {"logreg": "1 · LogReg", "random_forest": "2 · Random Forest", "cnn_scratch": "3 · CNN",
-               "densenet_frozen": "4 · DenseNet frozen", "densenet_finetuned": "5 · DenseNet tuned"}
+               "densenet_frozen": "4 · DenseNet frozen", "densenet_finetuned": "5 · DenseNet tuned",
+               **{f"effnetv2_{C.EFFNET_VARIANT.lower()}_{r}_finetuned": f"{6 + i} · EffNetV2 {r}px"
+                  for i, r in enumerate(C.EFFNET_RESOLUTIONS)}}
 
 
 def pct(x):
@@ -136,7 +159,10 @@ with tab_results:
             "ECE ↓": st.column_config.NumberColumn(format="%.3f", help="Expected calibration error: lower = more honest confidence"),
             "p vs best": st.column_config.TextColumn(help="McNemar test: p < 0.05 means the best model is significantly better"),
         })
-        st.caption("⭐ = deployed model. Every other model is significantly worse (McNemar p < 0.01).")
+        others = [m["p_vs_best"] for m in models if m["p_vs_best"] is not None]
+        n_sig = sum(p < 0.05 for p in others)
+        st.caption(f"⭐ = deployed model, picked by validation macro-F1 (the test set played no part). "
+                   f"{n_sig} of {len(others)} other models are significantly worse (McNemar p < 0.05).")
 
         # ---------- where the difficulty is ----------
         st.divider()
@@ -144,11 +170,12 @@ with tab_results:
         c1, c2 = st.columns(2)
         with c1:
             st.markdown("**Two sub-tasks, very different difficulty**")
+            shown = [m for m in models if m["key"] in SHORT_NAMES]   # one bar pair per model family
             split = pd.DataFrame({
-                "Normal vs Pneumonia": [m["binary_accuracy"] * 100 for m in models],
-                "Bacterial vs Viral": [m["subtype_accuracy"] * 100 for m in models],
-            }, index=[SHORT_NAMES.get(m["key"], m["name"]) for m in models])
-            st.bar_chart(split, horizontal=True, stack=False, x_label="", y_label="Accuracy (%)", height=320)
+                "Normal vs Pneumonia": [m["binary_accuracy"] * 100 for m in shown],
+                "Bacterial vs Viral": [m["subtype_accuracy"] * 100 for m in shown],
+            }, index=[SHORT_NAMES[m["key"]] for m in shown])
+            st.bar_chart(split, horizontal=True, stack=False, x_label="", y_label="Accuracy (%)", height=380)
             st.caption(f"Spotting pneumonia is nearly solved ({pct(best['binary_accuracy'])} for the best model). "
                        f"Telling bacterial from viral is where every model struggles ({pct(best['subtype_accuracy'])}).")
         with c2:
@@ -179,7 +206,7 @@ with tab_results:
             better = cal["ece_after"] < cal["ece_before"]
             st.markdown(f"Temperature T = **{cal['temperature']:.2f}**. ECE {cal['ece_before']:.3f} → {cal['ece_after']:.3f}. "
                         + ("Scaling made the confidence values more honest." if better else
-                           "T ≈ 1, so the model was already well calibrated and scaling didn't help on test."))
+                           "Scaling fitted on validation did not improve test calibration."))
             figure("reliability_best.png")
 
         # ---------- deeper figures ----------
@@ -192,27 +219,91 @@ with tab_results:
             with c2:
                 figure(f"roc_{best_key}.png")
         with st.expander("Grad-CAM examples: correct and wrong predictions"):
-            st.caption("Red = regions that drove the prediction. In one wrong case the model looked at the 'R' marker, not the lungs.")
+            st.caption("Red = regions that drove the prediction. Wrong predictions are shown too, to expose shortcuts.")
             g1, g2, g3 = st.columns([1, 2, 1])
             with g2:
                 figure(f"gradcam_grid_{best_key}.png")
         with st.expander("Training curves"):
+            for r in C.EFFNET_RESOLUTIONS:
+                figure(f"history_effnetv2_{C.EFFNET_VARIANT.lower()}_{r}_finetuned.png",
+                       f"EfficientNetV2-{C.EFFNET_VARIANT} {r}px: stage 1 (frozen) then stage 2 (fine-tune)")
             figure("history_densenet.png", "DenseNet121: stage 1 (frozen) then stage 2 (fine-tune)")
             figure("history_cnn_scratch.png", "CNN from scratch")
+
+        # ---------- resolution study (A) ----------
+        res_path = C.RESULTS_DIR / "resolution_study.json"
+        if res_path.exists():
+            st.divider()
+            st.subheader(f"Resolution study: EfficientNetV2-{C.EFFNET_VARIANT}")
+            R = json.loads(res_path.read_text())
+            st.caption("Same recipe, seed, split and batch size at every resolution; only the input size changes.")
+            st.dataframe(pd.DataFrame([{
+                "Resolution": f"{r['res']}px",
+                "Accuracy": r["accuracy"] * 100,
+                "Macro-F1": r["macro_f1"],
+                "Normal F1": r["f1"]["NORMAL"],
+                "Bacterial F1": r["f1"]["PNEUMONIA_BACTERIA"],
+                "Viral F1": r["f1"]["PNEUMONIA_VIRUS"],
+                "GFLOPs / image": r.get("gflops_per_image"),
+                "ms / image (b32)": r.get("latency_ms_per_image_batch32"),
+                "Train time (min)": r.get("train_minutes_total"),
+            } for r in R]), hide_index=True, width="stretch", column_config={
+                "Accuracy": st.column_config.ProgressColumn(format="%.1f%%", min_value=50, max_value=100),
+                "Macro-F1": st.column_config.NumberColumn(format="%.3f"),
+                "Normal F1": st.column_config.NumberColumn(format="%.3f"),
+                "Bacterial F1": st.column_config.NumberColumn(format="%.3f"),
+                "Viral F1": st.column_config.NumberColumn(format="%.3f"),
+                "GFLOPs / image": st.column_config.NumberColumn(format="%.2f"),
+                "ms / image (b32)": st.column_config.NumberColumn(format="%.2f"),
+                "Train time (min)": st.column_config.NumberColumn(format="%.0f"),
+            })
+            figure("resolution_accuracy.png")
+            c1, c2 = st.columns([3, 1])
+            with c1:
+                figure("resolution_cost.png")
+            with c2:
+                figure("resolution_tradeoff.png")
+
+        # ---------- conformal prediction (C) ----------
+        conf_path = C.RESULTS_DIR / "conformal_summary.json"
+        if conf_path.exists():
+            st.divider()
+            CF = json.loads(conf_path.read_text())
+            m = CF["methods"][C.CONFORMAL_METHOD]
+            st.subheader("Conformal prediction: answers with a guarantee")
+            st.markdown(f"Instead of one label, the model returns every diagnosis it can't rule out. Calibrated on "
+                        f"{CF['n_cal']} validation X-rays so that the true diagnosis is in the set at least "
+                        f"**{1 - CF['alpha']:.0%}** of the time.")
+            k1, k2, k3, k4 = st.columns(4)
+            k1.metric("Test coverage", pct(m["coverage"]), f"target {1 - CF['alpha']:.0%}", delta_color="off",
+                      delta_arrow="off", border=True)
+            k2.metric("Average set size", f"{m['avg_set_size']:.2f}", "out of 3 classes", delta_color="off",
+                      delta_arrow="off", border=True)
+            k3.metric("Single-label answers", pct(m["singleton_rate"]),
+                      f"{pct(m['singleton_accuracy'])} correct", delta_color="off", delta_arrow="off", border=True)
+            k4.metric("Viral coverage", pct(m["per_class_coverage"]["PNEUMONIA_VIRUS"]), "hardest class",
+                      delta_color="off", delta_arrow="off", border=True)
+            c1, c2 = st.columns(2)
+            with c1:
+                figure("conformal_set_composition.png")
+            with c2:
+                figure("conformal_alpha_sweep.png")
 
 with tab_about:
     st.markdown(f"""
 **Task.** 3-class classification of paediatric chest X-rays (Kermany et al., Kaggle *chest-xray-pneumonia*),
 relabelled from filenames into Normal / Bacterial / Viral.
 
-**Pipeline.** Grayscale → CLAHE contrast enhancement → 224×224 → DenseNet121 (ImageNet), fine-tuned in two stages.
+**Pipeline.** Grayscale → CLAHE contrast enhancement → resize → CNN backbone (ImageNet-pretrained DenseNet121 or
+EfficientNetV2, fine-tuned in two stages). The served model is the one with the best validation macro-F1.
 
 **Why it's trustworthy(ish):**
 - *Patient-level split*: no patient appears in both training and test data.
 - *Calibrated confidence*: temperature scaling so "90%" really means ~90%.
 - *Abstains when unsure*: below the confidence threshold it refers to a human.
+- *Conformal prediction sets*: a set of diagnoses that contains the true one with a guaranteed probability.
 - *Grad-CAM + focus check*: shows where the model looked and warns if it's looking at the border.
 
 **Limitations.** Single-hospital paediatric dataset; bacterial vs viral is hard even for radiologists;
-no external validation. Model: `{C.MODELS_DIR.name}/densenet121_finetuned.keras`.
+no external validation. The conformal guarantee assumes new X-rays resemble the calibration set.
 """)
